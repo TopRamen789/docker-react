@@ -1,0 +1,23 @@
+# .dev just clarifies that this file is only used when we're
+# running in development.
+FROM node:16-alpine
+
+USER node
+
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+# Cache coolness
+COPY --chown=node:node ./package.json ./
+RUN npm install
+COPY --chown=node:node ./ ./
+
+CMD ["npm", "run", "start"]
+# When running `docker build .`
+# add on `-f Dockerfile.dev`
+# so it knows to use this file.
+
+# You should probably remove node_modules before running
+# docker build on this.
+# .dev just clarifies that this file is only used when we're
+# running in development.

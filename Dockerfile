@@ -14,4 +14,5 @@ RUN npm run build
 # runner phase
 # just a note: /app/build <---- ALL THE STUFF
 FROM nginx
+EXPOSE 80
 COPY --from=builder /home/node/app/build /usr/share/nginx/html
